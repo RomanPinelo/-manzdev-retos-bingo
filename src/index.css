@@ -91,6 +91,7 @@ body {
   font-size: 0.7rem;
   font-weight: bold;
   font-style: italic;
+  cursor: pointer;
 }
 
 .tarjetaBombo .bombo .numBombo {
@@ -102,10 +103,12 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 2.25rem;
+  cursor: pointer;
 }
 
 .tarjetaBombo .bombo .winner {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .numSacado {
