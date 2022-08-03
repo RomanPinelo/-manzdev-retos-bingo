@@ -6,7 +6,7 @@
 
 body {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: rgb(36,85,192);
   background: -moz-linear-gradient(180deg, rgb(36,85,192) 0%, rgb(11,20,44) 100%);
   background: -webkit-linear-gradient(180deg, rgb(36,85,192) 0%, rgb(11,20,44) 100%);
@@ -18,11 +18,16 @@ body {
 /*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*
   Mobile View 
 *_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*/
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .tarjetaBombo .tarjeta {
   width: 18.75rem;
   height: 14.0625rem;
   background-color: #9e1c23;
-  margin: 0.5rem auto;
 }
 
 .tarjetaBombo .tarjeta h3 {
@@ -44,7 +49,7 @@ body {
   flex-wrap: wrap;
 }
 
-.tarjetaBombo .tarjeta .tarjetaNumeros p {
+.tarjetaBombo .tarjeta .tarjetaNumeros .numeros {
   background-color: #eeeeee;
   width: 3.2rem;
   height: 3.2rem;
@@ -54,15 +59,15 @@ body {
   font-weight: bold;
 }
 
-.tarjetaBombo .tarjeta .tarjetaNumeros p.active {
+.tarjetaBombo .tarjeta .tarjetaNumeros .numeros.active {
   background-color: transparent;
   text-decoration: line-through;
   color: #54090d;
 }
 
 .tarjetaBombo .bombo {
-  width: 15.625rem;
-  height: 15.625rem;
+  width: 9rem;
+  height: 9rem;
   background: rgb(238,238,238);
   background: -moz-radial-gradient(circle, rgba(238,238,238,1) 0%, rgba(132,132,130,1) 100%);
   background: -webkit-radial-gradient(circle, rgba(238,238,238,1) 0%, rgba(132,132,130,1) 100%);
@@ -72,17 +77,39 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1.5rem auto;
+  border: 5px solid #000;
 }
 
 .tarjetaBombo .bombo .inicio {
   background-color: #eeeeee;
   border: 2px solid #848482;
-  width: 13rem;
-  height: 3rem;
+  width: 6rem;
+  height: 2rem;
   text-align: center;
-  line-height: 3rem;
-  font-size: 1.5rem;
+  line-height: 2rem;
+  font-size: 0.7rem;
   font-weight: bold;
+  font-style: italic;
+}
+
+.tarjetaBombo .bombo .numBombo {
+  background-color: #eeeeee;
+  border: 4px solid #848482;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.25rem;
+}
+
+.tarjetaBombo .bombo .winner {
+  font-weight: bold;
+}
+
+.numSacado {
+  display: none;
 }
 
 
@@ -90,7 +117,29 @@ body {
   iPad View
 *_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*/
 @media screen and (min-width: 768px) {
+  .tarjetaBombo .bombo {
+    width: 15.625rem;
+    height: 15.625rem;
+    margin: 4rem auto;
+  }
+  
+  .tarjetaBombo .bombo .inicio {
+    width: 13rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.5rem;
+  }
 
+  .tarjetaBombo .bombo .numBombo {
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 2.5rem;
+  }
+
+  .tarjetaBombo .bombo .winner {
+    font-size: 1.75rem;
+  }
 }
 
 
@@ -98,5 +147,38 @@ body {
   Desktop View
 *_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*/
 @media screen and (min-width: 1000px) {
-  
+  body {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .tarjetaBombo {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+  }
+
+  .tarjetaBombo .bombo {
+    margin: 0;
+  }
+
+  .numSacado {
+    border: 1px solid #eeeeee;
+    display: block;
+    width: 90%;
+    height: 17.5rem;
+    overflow-y: auto;
+  }
+
+  .numSacado .numSacado__num {
+    display: inline-block;
+    background-color: #eeeeee;
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    margin: 1rem 0.28rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
 }
