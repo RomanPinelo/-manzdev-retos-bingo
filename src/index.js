@@ -12,7 +12,7 @@ var numeroSacado = document.getElementById("numSacado");
 var numerosBombo = [];
 var numerosJugador = [];
 var numerosCPU = [];
-var numeroActual, indice;
+var numeroActual, contadorJugador, contadorCPU;
 
 
 
@@ -25,19 +25,66 @@ function numerosRandom(min, max) {
 }
 
 function generaNumerosJugador() {
-  for (let i = 0; i < 15; i++) {
-    numerosJugador.push(numerosRandom(1, 90));
-  }
+  let numeroAleatorio;
+  let id = setInterval(() => {
 
-  numerosJugador.forEach(element => tarjetaJugador.innerHTML += `<p class="numeros">${element}</p>`);
+    numeroAleatorio = numerosRandom(1, 90);
+
+    if (numerosJugador.length < 15) {
+      if (!(numerosJugador.includes(numeroAleatorio))) {
+        numerosJugador.push(numeroAleatorio);
+      }
+    } else {
+      clearInterval(id);
+      numerosJugador.forEach(element => tarjetaJugador.innerHTML += `<p class="numeros numerosTarjetaJugador">${element}</p>`);
+    }
+  }, 1);
 }
 
 function generaNumerosCPU() {
-  for (let i = 0; i < 15; i++) {
-    numerosCPU.push(numerosRandom(1, 90));
-  }
+  let numeroAleatorio;
+  let id = setInterval(() => {
 
-  numerosCPU.forEach(element => tarjetaCPU.innerHTML += `<p class="numeros">${element}</p>`);
+    numeroAleatorio = numerosRandom(1, 90);
+
+    if (numerosCPU.length < 15) {
+      if (!(numerosCPU.includes(numeroAleatorio))) {
+        numerosCPU.push(numeroAleatorio);
+      }
+    } else {
+      clearInterval(id);
+      numerosCPU.forEach(element => tarjetaCPU.innerHTML += `<p class="numeros numerosTarjetaCPU">${element}</p>`);
+    }
+  }, 1);
+}
+
+function verificaEnTarjetas(numeroActual) {
+  let numerosTarjetaJugador = document.querySelectorAll(".numerosTarjetaJugador");
+  let numerosTarjetaCPU = document.querySelectorAll(".numerosTarjetaCPU");
+
+  if (numerosJugador.includes(numeroActual)) {
+    let indice = numerosJugador.indexOf(numeroActual);
+    numerosTarjetaJugador[indice].classList.toggle("active");
+    contadorJugador++;
+  }
+  if (numerosCPU.includes(numeroActual)) {
+    let indice = numerosCPU.indexOf(numeroActual);
+    numerosTarjetaCPU[indice].classList.toggle("active");
+    contadorCPU++;
+  }
+  if ((contadorJugador == 15) && (contadorCPU == 15)) {
+    numeroBombo.style.display = 'none';
+    win.style.display = 'block';
+    win.innerHTML = "Empates!!!";
+  } else if(contadorJugador == 15) {
+    numeroBombo.style.display = 'none';
+    win.style.display = 'block';
+    win.innerHTML = "Jugador gana!!!";
+  } else if (contadorCPU == 15) {
+    numeroBombo.style.display = 'none';
+    win.style.display = 'block';
+    win.innerHTML = "CPU gana!!!";
+  }
 }
 
 
@@ -45,15 +92,11 @@ function generaNumerosCPU() {
 // Eventos
 //Termina de cargar el contenido y pinta todo lo necesario del juego
 document.addEventListener("DOMContentLoaded", () => {
-  indice = 89;
-  for (let m = 1; m < 91; m++) {
-    numerosBombo.push(m);
-  }
-  console.log(numerosBombo); //Quitar al final
-  console.log(indice); //Quitar al final
   tarjetaJugador.innerHTML = "";
   tarjetaCPU.innerHTML = "";
   numeroSacado.innerHTML = "";
+  contadorJugador = 0;
+  contadorCPU = 0;
 
   inicioBombo.style.display = 'block';
   numeroBombo.style.display = 'none';
@@ -64,14 +107,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 inicioBombo.addEventListener('click', function(){
-  
+  inicioBombo.style.display = 'none';
+  numeroBombo.style.display = 'block';
+  let id = setInterval(() => {
+    numeroActual = numerosRandom(1, 90);
+    if (!(numerosBombo.includes(numeroActual))) {
+      clearInterval(id);
+      numerosBombo.push(numeroActual);
+      numeroSacado.innerHTML += `<p class="numSacado__num">${numeroActual}</p>`;
+      numeroBombo.innerHTML = numeroActual;
+      verificaEnTarjetas(numeroActual);
+    }
+  }, 1);
 });
 
 numeroBombo.addEventListener('click', function(){
-  
+  let id = setInterval(() => {
+    numeroActual = numerosRandom(1, 90);
+    if (!(numerosBombo.includes(numeroActual))) {
+      clearInterval(id);
+      numerosBombo.push(numeroActual);
+      numeroSacado.innerHTML += `<p class="numSacado__num">${numeroActual}</p>`;
+      numeroBombo.innerHTML = numeroActual;
+      verificaEnTarjetas(numeroActual);
+    }
+    if (numerosBombo.length == 90) {
+      clearInterval(id);
+    }
+  }, 1);
 });
 
 
-// todos.addEventListener('click', function(){
-//   location.reload();
-// })
+win.addEventListener('click', function(){
+  location.reload();
+})
