@@ -21,6 +21,14 @@ En el link del reto, se podrá ver el funcionamiento propuesto y en el link del 
 
 Muchas gracias a manzdev!!!!
 
+
+![bingo](https://user-images.githubusercontent.com/71656431/182977623-31a6b756-8850-4565-ad9f-04de66434ab4.jpg)
+
+![2](https://user-images.githubusercontent.com/71656431/182977628-99de3e29-01ee-44b6-a8c6-dcdc9a7d9d4c.jpg)
+
+![3](https://user-images.githubusercontent.com/71656431/182977626-eead0dbe-9ebf-43e0-b033-13715b6bf8bc.jpg)
+
+
 > Puedes encontrar otros retos de Manz.dev en: <br>▶ https://lenguajejs.com/retos/
 
 🌍 **URL del juego funcionando**: *https://romanpinelo.github.io/manzdev-retos-bingo/src/*
